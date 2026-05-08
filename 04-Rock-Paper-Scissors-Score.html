@@ -26,11 +26,19 @@
 
     <script>
 
-        const score = {
-            Win : 0, 
-            loss : 0,
-            tie : 0
-        };
+        let score = JSON.parse(localStorage.getItem('score'))
+
+        if (score === null)
+            {
+                score = {
+                Win : 0, 
+                loss : 0,
+                tie : 0
+             
+                       }       
+            }
+        
+        ;
         
         function computerMoveResult()
         {
@@ -91,6 +99,8 @@
             score.loss = score.loss + 1;
         }
 
+        localStorage.setItem('score', JSON.stringify(score));
+
         alert(`You Picked ${playerMove}. Computer picked ${computerMove}... Result: ${result}
         
         score: Win - ${score.Win } Loss - ${score.loss } Tie - ${score.tie}`);
@@ -101,6 +111,7 @@
             score.Win = 0;
             score.tie = 0;
             score.loss = 0;
+            localStorage.removeItem('score');
         }
 
  
